@@ -22,4 +22,28 @@ public class trappingRain {
         }
         return total;
     }
+    public int trap(int[] height) {
+    int left = 0;int right = height.length-1;
+    int LeftMax = height[left];
+    int RightMax = height[right];
+    int res = 0;
+    if (height.length==0){
+        return res;
+    }
+    while (left<right){
+        if (LeftMax<RightMax){
+            left++;//左右指针谁小谁就更新
+            LeftMax=Math.max(LeftMax,height[left]);//更新后比较哪一个是新的最大值
+            res = LeftMax-height[left]+res;//if 语句已经判断过谁小,left is bottleneck,我们需要的是min(L,R)
+        }
+        else {
+           right--;
+           RightMax = Math.max(RightMax,height[right]);
+           res = RightMax-height[right]+res;
+        }
+
+    }
+    return res;
+
+    }
 }
